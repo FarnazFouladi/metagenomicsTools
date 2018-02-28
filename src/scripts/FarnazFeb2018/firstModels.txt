@@ -7,9 +7,9 @@ library("Kendall")
 filepath =paste("pcoa__withMetadata",".txt",sep="")
 
 myT <- read.table(filepath, sep="\t", header=TRUE)
-myT <- myT[myT$Timepoint_code==2 | myT$Timepoint_code==3,]
 
 humanDonorIDs <- myT$Donor[myT$Species=="Human"]
+humanDonorIDs <-humanDonorIDs[-c(11,15,17)]
 
 makePretty <- function(s)
 {
@@ -60,7 +60,7 @@ for ( i in 30:508)
 		if( length(hBug) != 1)
 			stop("No")
 			
-		mouseBugs <- bug[myT$Donor==h & myT$Species=="Mouse"]
+		mouseBugs <- bug[myT$Donor==h & myT$Species=="Mouse" & (myT$Timepoint_code==2| myT$Timepoint_code==3)]
 		
 		for( j in 1:(length(mouseBugs)) ) 
 		{
